@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+// test
 public class HullSlot : MonoBehaviour {
 	
 	public bool available;
