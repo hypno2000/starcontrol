@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 3e75870c09f74b44398690d0751ddf55
+labels:
+- thruster
+- thrusters
+- engine
+- jet
+- jets
+- flame
+- force
+- rocket
+- rockets
+- propulsion
+- propulsive
+- seamless
+- spacecraft
+- loop
+- wav
+- rocketengine
+- engines
+- prefab
+- space
+- velocity
+- emitter
+- particles
+- particleeffect
+NativeFormatImporter:
+  userData: 
