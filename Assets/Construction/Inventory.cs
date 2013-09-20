@@ -66,13 +66,6 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 			AddModule(Instantiate(module) as HullConstructionModule);
 			AddModule(Instantiate(module) as HullConstructionModule);
 			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
 			
 			ThrusterConstructionModule thrusterModule = game.GetConstructionModulePrefab(ModuleType.Thruster) as ThrusterConstructionModule;
 			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
