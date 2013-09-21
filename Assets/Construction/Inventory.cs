@@ -41,6 +41,7 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		foreach (var slot in slots) {
 			var mod = slot.module;
 			if (mod != null) {
+				slot.number = 1;
 				RemoveModule(mod);
 				Destroy(mod.gameObject);
 			}
@@ -52,81 +53,45 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 
 		// no manifest, create test inventory
 		if (scene.inventoryManifest == null) {
-			HullConstructionModule module = game.GetConstructionModulePrefab(ModuleType.Hull) as HullConstructionModule;
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			
-			ThrusterConstructionModule thrusterModule = game.GetConstructionModulePrefab(ModuleType.Thruster) as ThrusterConstructionModule;
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			AddModule(Instantiate(thrusterModule) as ThrusterConstructionModule);
-			
-			ManeuveringConstructionModule maneuveringModule = game.GetConstructionModulePrefab(ModuleType.Maneuvering) as ManeuveringConstructionModule;
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
-			AddModule(Instantiate(maneuveringModule) as ManeuveringConstructionModule);
+			HullConstructionModule modulePrefab = game.GetConstructionModulePrefab(ModuleType.Hull) as HullConstructionModule;
+			HullConstructionModule module = Instantiate(modulePrefab) as HullConstructionModule;
+			module.manifest = new ModuleManifest("Basic hull");
+			AddModules(module, 3);
 
-			WeaponConstructionModule weaponModule = game.GetConstructionModulePrefab(ModuleType.Weapon) as WeaponConstructionModule;
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
-			AddModule(Instantiate(weaponModule) as WeaponConstructionModule);
+			ThrusterConstructionModule thrusterModulePrefab = game.GetConstructionModulePrefab(ModuleType.Thruster) as ThrusterConstructionModule;
+			var thrusterModule = Instantiate(thrusterModulePrefab) as ThrusterConstructionModule;
+			thrusterModule.manifest = new ModuleManifest("Basic thruster");
+			AddModules (thrusterModule, 3);
 
-			BatteryConstructionModule batteryModule = game.GetConstructionModulePrefab(ModuleType.Battery) as BatteryConstructionModule;
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
-			AddModule(Instantiate(batteryModule) as BatteryConstructionModule);
+			ManeuveringConstructionModule maneuveringModulePrefab = game.GetConstructionModulePrefab(ModuleType.Maneuvering) as ManeuveringConstructionModule;
+			var maneuveringModule = Instantiate(maneuveringModulePrefab) as ManeuveringConstructionModule;
+			maneuveringModule.manifest = new ModuleManifest("Basic turner");
+			AddModules(maneuveringModule, 3);
 
-			CrewConstructionModule crewModule = game.GetConstructionModulePrefab(ModuleType.Crew) as CrewConstructionModule;
-			AddModule(Instantiate(crewModule) as CrewConstructionModule);
-			AddModule(Instantiate(crewModule) as CrewConstructionModule);
-			AddModule(Instantiate(crewModule) as CrewConstructionModule);
-			AddModule(Instantiate(crewModule) as CrewConstructionModule);
-			AddModule(Instantiate(crewModule) as CrewConstructionModule);
+			WeaponConstructionModule weaponModulePrefab = game.GetConstructionModulePrefab(ModuleType.Weapon) as WeaponConstructionModule;
+			var weaponModule = Instantiate(weaponModulePrefab) as WeaponConstructionModule;
+			weaponModule.manifest = new ModuleManifest("Missile weapon");
+			AddModules (weaponModule, 3);
 
-			FuelConstructionModule fuelModule = game.GetConstructionModulePrefab(ModuleType.Fuel) as FuelConstructionModule;
-			AddModule(Instantiate(fuelModule) as FuelConstructionModule);
-			AddModule(Instantiate(fuelModule) as FuelConstructionModule);
-			AddModule(Instantiate(fuelModule) as FuelConstructionModule);
-			AddModule(Instantiate(fuelModule) as FuelConstructionModule);
-			AddModule(Instantiate(fuelModule) as FuelConstructionModule);
-			AddModule(Instantiate(fuelModule) as FuelConstructionModule);
+			BatteryConstructionModule batteryModulePrefab = game.GetConstructionModulePrefab(ModuleType.Battery) as BatteryConstructionModule;
+			var batteryModule = Instantiate(batteryModulePrefab) as BatteryConstructionModule;
+			batteryModule.manifest = new ModuleManifest("Battery");
+			AddModules (batteryModule, 3);
 
-			PowerConstructionModule powerModule = game.GetConstructionModulePrefab(ModuleType.Power) as PowerConstructionModule;
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
-			AddModule(Instantiate(powerModule) as PowerConstructionModule);
+			CrewConstructionModule crewModulePrefab = game.GetConstructionModulePrefab(ModuleType.Crew) as CrewConstructionModule;
+			var crewModule = Instantiate(crewModulePrefab) as CrewConstructionModule;
+			crewModule.manifest = new ModuleManifest("Crew");
+			AddModules (crewModule, 3);
+
+			FuelConstructionModule fuelModulePrefab = game.GetConstructionModulePrefab(ModuleType.Fuel) as FuelConstructionModule;
+			FuelConstructionModule fuelModule = Instantiate(fuelModulePrefab) as FuelConstructionModule;
+			fuelModule.manifest = new ModuleManifest("Fuel");
+			AddModules (fuelModule, 3);
+
+			PowerConstructionModule powerModulePrefab = game.GetConstructionModulePrefab(ModuleType.Power) as PowerConstructionModule;
+			PowerConstructionModule powerModule = Instantiate(powerModulePrefab) as PowerConstructionModule;
+			powerModule.manifest = new ModuleManifest("Power");
+			AddModules (powerModule, 3);
 		}
 
 		// create inventory based on manifest
@@ -139,37 +104,69 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		Vector3 screen = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
 		transform.position = new Vector3(-width / 2f, screen.y - .7f, 0f);
 	}
-	
+
 	/**
 	 * construct invetory based on manifest
 	 */
 	public void Construct(InventoryManifest manifest) {
 		modules = new List<ConstructionModule>();
-		foreach (ModuleManifest moduleManifest in manifest.modules) {
+		foreach (var slotManifest in manifest.slots) {
+			var moduleManifest = slotManifest.module;
 			ConstructionModule module = Instantiate(
 				game.GetConstructionModulePrefab(moduleManifest.type),
 				moduleManifest.position,
 				moduleManifest.rotation
-			) as ConstructionModule;
-			AddModule(module, slots[moduleManifest.inventorySlotIndex]);
+				) as ConstructionModule;
+			module.manifest = moduleManifest;
+
+			var slot = slots[moduleManifest.inventorySlotIndex];
+
+			slot.number += slotManifest.count - 1;
+			AddModule(module, slot);
+
+			Debug.Log("Created " + slotManifest.count + " " + module.GetModuleType() + " modules with name: " + moduleManifest.name);
 		}
 	}
-	
+
 	public void AddModule(ConstructionModule module) {
 		foreach (InventorySlot slot in slots) {
-			if (slot.available) {
+			Debug.Log(module.manifest.name);
+			if (slot.available || (module.manifest.name == slot.module.manifest.name)) {
+				if(slot.module!=null)
+					Debug.Log("inside slot: " + slot.module.manifest.name);
+				else
+					Debug.Log(slot.available);
 				AddModule(module, slot);
 				return;
 			}
 		}
 	}
-	
+
+	public void AddModules(ConstructionModule module, int num){
+		foreach (InventorySlot slot in slots) {
+			if (slot.available || (module.manifest.name == slot.module.manifest.name)) {
+				AddModule(module, slot);
+				slot.number += num-1;
+				return;
+			}
+		}
+	}
+
 	public void AddModule(ConstructionModule module, InventorySlot slot) {
+		if(!slot.available && module.manifest.name != slot.module.manifest.name){
+			Debug.Log("Addmodule shouldn't happen");	
+			return;
+		}
+
 		if (module.inventorySlot == slot) {
 			module.transform.localPosition = Vector2.zero;
 			return;
 		}
-		if (!slot.available) {
+		if (!slot.available ) {
+			if(module.manifest.name == slot.module.manifest.name){
+				Destroy(module.gameObject);
+				slot.number++;
+			}
 			return;
 		}
 		if (module.inventorySlot != null) {
@@ -184,45 +181,69 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		slot.module = module;
 		modules.Add(module);
 		slot.Deactivate();
+		slot.number++;
 	}
-	
+
 	public void RemoveModule(ConstructionModule module) {
 		if (module.inventorySlot == null) {
 			return;
 		}
-		Debug.Log("removing module from invetory");
 		InventorySlot slot = module.inventorySlot;
-		slot.module = null;
-		module.inventorySlot = null;
-		modules.Remove(module);
-		slot.Activate();
+
+		if(slot.number > 1){
+			var prefab = game.GetConstructionModulePrefab(module.GetModuleType());
+			var newModuleInstance = Instantiate(prefab) as ConstructionModule;
+
+			newModuleInstance.transform.parent = slot.transform;
+			newModuleInstance.transform.localPosition = Vector2.zero;
+			newModuleInstance.inventorySlot = slot;
+			newModuleInstance.manifest = new ModuleManifest(module);
+			newModuleInstance.manifest.name = module.manifest.name;
+			slot.module = newModuleInstance;
+			module.inventorySlot = null;
+		}
+		else{
+			slot.module = null;
+			module.inventorySlot = null;
+			modules.Remove(module);
+			Debug.Log(slot.number + " " + module.manifest.name);
+			slot.Activate();
+		}
+		if(slot.number > 0)
+			slot.number--;
 	}
-	
+
 	public void RemoveModule(ConstructionModule module, InventorySlot slot) {
 		if (module.inventorySlot != slot) {
 			return;
 		}
 		RemoveModule(module);
 	}
-	
+
 	public void Save() {
 		game.inventoryManifest = scene.inventoryManifest = CreateManifest();
 	}
-	
+
 	/**
 	 * Save state to manifest
 	 */
 	public InventoryManifest CreateManifest() {
 		InventoryManifest manifest = new InventoryManifest(this);
-		foreach (ConstructionModule module in modules) {
-			ModuleManifest moduleManifest = new ModuleManifest(module);
-			moduleManifest.inventorySlotIndex = slots.FindIndex((x) => x == module.inventorySlot);
-			moduleManifest.type = (ModuleType)module.GetType().GetField("type").GetRawConstantValue();
-			manifest.modules.Add(moduleManifest);
+		foreach (var slot in slots) {
+			if (slot.module == null) {
+				continue;
+			}
+			var slotManifest = new InventorySlotManifest();
+			ModuleManifest moduleManifest = slot.module.manifest;
+			slotManifest.module = moduleManifest;
+			slotManifest.count = slot.number;
+			moduleManifest.inventorySlotIndex = slots.FindIndex((x) => x == slot);
+			moduleManifest.type = (ModuleType)slot.module.GetType().GetField("type").GetRawConstantValue();
+			manifest.slots.Add(slotManifest);
 		}
 		return manifest;
 	}
-	
+
 	public void OnLeave() {
 		Save();
 	}

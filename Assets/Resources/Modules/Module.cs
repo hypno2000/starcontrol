@@ -5,6 +5,7 @@ abstract public class Module : SceneAware<Scene>, Damageable {
 
 	public ModuleStats stats;
 	public bool isActive = true;
+	public ModuleManifest manifest;
 
 	[HideInInspector]
 	public Ship ship;
@@ -63,7 +64,7 @@ abstract public class Module : SceneAware<Scene>, Damageable {
 	}
 
 	public float TakeDamage(float damage) {
-//		Debug.Log(this + " taking damage: " + damage + " / " + hitPointsLeft);
+		//		Debug.Log(this + " taking damage: " + damage + " / " + hitPointsLeft);
 		if (damage >= hitPointsLeft) {
 			damage = hitPointsLeft;
 			hitPointsLeft = 0f;
@@ -155,5 +156,5 @@ abstract public class Module : SceneAware<Scene>, Damageable {
 		}
 		return 0f;
 	}
-	
+
 }

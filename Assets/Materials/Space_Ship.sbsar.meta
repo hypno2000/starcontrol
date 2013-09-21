@@ -146,15 +146,14 @@ SubstanceImporter:
           first:
             name: _MainTex
           second:
-            texture: {fileID: -1407584947, guid: 552a9f3aebd7ff74480ed5449f232302,
-              type: 3}
+            texture: {instanceID: 0}
             scale: {x: 1, y: 1}
             offset: {x: 0, y: 0}
         data:
           first:
             name: _BumpMap
           second:
-            texture: {fileID: 191483299, guid: 552a9f3aebd7ff74480ed5449f232302, type: 3}
+            texture: {instanceID: 0}
             scale: {x: 1, y: 1}
             offset: {x: 0, y: 0}
       floats:

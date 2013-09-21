@@ -42,6 +42,8 @@ abstract public class InternalConstructionModule : ConstructionModule {
 
 		switch (constructionMode) {
 		case ConstructionMode.Move:
+			Debug.Log(hullModule);
+			Debug.Log(inventorySlot);
 			if (hullModule != null) {
 				transform.position = hullModule.transform.position;
 			} else if (inventorySlot != null) {

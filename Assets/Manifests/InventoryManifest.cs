@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class InventoryManifest : PositionalManifest {
 	
-	public List<ModuleManifest> modules = new List<ModuleManifest>();
+	public List<InventorySlotManifest> slots = new List<InventorySlotManifest>();
 
 	public InventoryManifest() {
 
