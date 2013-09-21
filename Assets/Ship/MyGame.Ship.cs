@@ -126,11 +126,16 @@ public class Ship : SceneAware<Scene> {
 			extMod.stats = extModManifest.stats;
 			extMod.hitPointsLeft = extModManifest.hitPointsLeft;
 			extMod.ship = this;
+			if (extMod is FuelCombatModule) {
+				((FuelModuleStats)extMod.stats).capacity = 10;
+			}
 			if (extMod is ThrusterCombatModule) {
 				propulsionSystem.AddThruster((ThrusterCombatModule)extMod);
+				((ThrusterModuleStats)extMod.stats).thrust = 10;
 			}
 			else if (extMod is ManeuveringCombatModule) {
 				propulsionSystem.AddManeuverer((ManeuveringCombatModule)extMod);
+				((ManeuveringModuleStats)extMod.stats).thrust = 10;
 			}
 			else if (extMod is WeaponCombatModule) {
 				weaponSystem.AddWeapon((WeaponCombatModule)extMod);

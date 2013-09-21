@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: 3cdcc26f4faf3eb4f976e6b3d5cb46ca
+labels:
+- explosion
+- bang
+- nuke
+- nuclear
+- impact
+- muffled
+- reverb
+- frag
+- c4
+- explosives
+- debris
+- blast
+- kickback
+- burning
+- crackling
+- echo
+- war
+- warfare
+- battle
+- destroy
+- destruction
+- implosion
+- explosions
+- wav
+- stereo
+- 16bit
+AudioImporter:
+  serializedVersion: 4
+  format: -1
+  quality: -1
+  stream: 1
+  3D: 1
+  forceToMono: 0
+  useHardware: 0
+  loopable: 0
+  userData: 

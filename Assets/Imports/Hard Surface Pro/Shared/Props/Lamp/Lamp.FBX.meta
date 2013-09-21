@@ -1,0 +1,76 @@
+fileFormatVersion: 2
+guid: 592bd998d8c6fb74da36fba86aef05fa
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: GeoSphere03
+    100002: //RootNode
+    100004: Object02
+    100006: Object03
+    400000: GeoSphere03
+    400002: //RootNode
+    400004: Object02
+    400006: Object03
+    2300000: GeoSphere03
+    2300002: Object02
+    2300004: Object03
+    3300000: GeoSphere03
+    3300002: Object02
+    3300004: Object03
+    4300000: GeoSphere03
+    4300002: Object01
+    4300004: Object02
+    4300006: Object03
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

@@ -25,13 +25,13 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 			for (int col = 0; col < colCount; col++) {
 				InventorySlot slot = Instantiate(slotPrefab) as InventorySlot;
 				slot.transform.parent = transform;
-				slot.transform.localPosition = new Vector3(col * 1.2f, row * -1.2f, 0f);
+				slot.transform.localPosition = new Vector3(col * 1.6f, row * -2.2f, 0f);
 				slots.Add(slot);
 			}
 		}
 
-		width = colCount * 1.2f - 1.2f;
-		height = rowCount * 1.2f - 1.2f;
+		width = colCount * 1.6f - 1.6f;
+		height = rowCount * 2.2f - 2.2f;
 
 		Reset();
 	}
@@ -53,12 +53,6 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		// no manifest, create test inventory
 		if (scene.inventoryManifest == null) {
 			HullConstructionModule module = game.GetConstructionModulePrefab(ModuleType.Hull) as HullConstructionModule;
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
-			AddModule(Instantiate(module) as HullConstructionModule);
 			AddModule(Instantiate(module) as HullConstructionModule);
 			AddModule(Instantiate(module) as HullConstructionModule);
 			AddModule(Instantiate(module) as HullConstructionModule);

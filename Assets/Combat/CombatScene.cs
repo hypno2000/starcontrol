@@ -8,6 +8,7 @@ public class CombatScene : Scene {
 	public Constellation constellationPrefab;
 	private List<GameObject> rootObjects;
 	private Ship playerShip;
+	private Ship hotSeatShip;
 	private Ship enemyShip;
 	private CrewGauge crewGauge;
 	private FuelGauge fuelGauge;
@@ -31,10 +32,15 @@ public class CombatScene : Scene {
 			}
 		}
 		playerShip = FindObjectOfType(typeof(PlayerShip)) as Ship;
+		hotSeatShip = FindObjectOfType(typeof(HotSeatShip)) as Ship;
 		enemyShip = FindObjectOfType(typeof(AiShip)) as Ship;
 		crewGauge = FindObjectOfType(typeof(CrewGauge)) as CrewGauge;
 		fuelGauge = FindObjectOfType(typeof(FuelGauge)) as FuelGauge;
 		energyGauge = FindObjectOfType(typeof(EnergyGauge)) as EnergyGauge;
+
+		playerShip.transform.position = new Vector3(11f, 0f, 0f);
+		hotSeatShip.transform.position = new Vector3(-11f, 0f, 0f);
+
 	}
 
 	void Update() {
@@ -58,17 +64,26 @@ public class CombatScene : Scene {
 		// add crew members
 		if (GUI.Button(new Rect(0, 45, 180, 40), "Add crew member")) {
 			playerShip.crewSystem.AddPersons(1);
+			hotSeatShip.crewSystem.AddPersons(1);
 		}
 
 		// remove crew members
 		if (GUI.Button(new Rect(0, 90, 180, 40), "Remove crew member")) {
 			playerShip.crewSystem.RemovePersons(1);
+			if (hotSeatShip) {
+				hotSeatShip.crewSystem.RemovePersons(1);
+			}
 		}
 
 		// add fuel
 		if (GUI.Button(new Rect(0, 135, 180, 40), "Add fuel")) {
 			playerShip.propulsionSystem.AddFuel(1);
-			enemyShip.propulsionSystem.AddFuel(1);
+			if (hotSeatShip) {
+				hotSeatShip.propulsionSystem.AddFuel(1);
+			}
+			if (enemyShip) {
+				enemyShip.propulsionSystem.AddFuel(1);
+			}
 		}
 
 		GUI.EndGroup();

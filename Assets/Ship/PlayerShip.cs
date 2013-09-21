@@ -22,7 +22,7 @@ public class PlayerShip : Ship, LeaveAware {
 		}
 
 		// accelerating
-		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
+		if (Input.GetKey(KeyCode.UpArrow)) {
 			propulsionSystem.Thrust();
 		}
 		else {
@@ -30,7 +30,7 @@ public class PlayerShip : Ship, LeaveAware {
 		}
 
 		// turning left
-		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+		if (Input.GetKey(KeyCode.LeftArrow)) {
 			propulsionSystem.ManeuverLeft();
 		}
 		else {
@@ -38,7 +38,7 @@ public class PlayerShip : Ship, LeaveAware {
 		}
 
 		// turning right
-		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+		if (Input.GetKey(KeyCode.RightArrow)) {
 			propulsionSystem.ManeuverRight();
 		}
 		else {
@@ -46,7 +46,7 @@ public class PlayerShip : Ship, LeaveAware {
 		}
 
 		// back
-		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
+		if (Input.GetKey(KeyCode.DownArrow)) {
 			propulsionSystem.ManeuverBack();
 		}
 		else {
@@ -54,7 +54,7 @@ public class PlayerShip : Ship, LeaveAware {
 		}
 
 		// fire weapons
-		if (Input.GetKey(KeyCode.Space)) {
+		if (Input.GetKey(KeyCode.RightShift)) {
 			weaponSystem.Fire();
 		}
 
