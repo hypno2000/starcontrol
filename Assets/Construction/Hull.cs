@@ -394,7 +394,6 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 		//energy.GetMaxEnergy();
 		//energy.GetMaxGeneration();
 		//GetEnergyConsumption();
-		energy.Generate();
 		return 0;
 	}
 

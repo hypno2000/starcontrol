@@ -50,9 +50,7 @@ public class HullEnergy {
 		throw new SystemException("This should not happen");
 	}
 
-	public void Generate(float time) {
-
-		// get generated energy
+	public float GetMaxGeneration() {
 		float energy = 0f;
 		foreach (var mod in powerPlants) {
 			if (!mod.isActive) {
@@ -60,6 +58,13 @@ public class HullEnergy {
 			}
 			energy += (float)mod.GetStats().power * time;
 		}
+		return energy;
+	}
+
+	public void Generate(float time) {
+
+		// get generated energy
+		float energy = GetMaxGeneration();
 		if (energy == 0f) {
 			return;
 		}
