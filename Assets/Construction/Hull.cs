@@ -18,6 +18,8 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 	[HideInInspector]
 	public HullEnergy energy;
 	[HideInInspector]
+	public HullThrust thrust;
+	[HideInInspector]
 	public Bounds bounds;
 	[HideInInspector]
 	public float maxLength;
@@ -30,6 +32,7 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 		crew = new HullCrew();
 		fuel = new HullFuel();
 		energy = new HullEnergy();
+		thrust = new HullThrust();
 
 		Reset();
 	}
@@ -251,6 +254,12 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 		if (module is BatteryConstructionModule) {
 			energy.batteries.Add((BatteryConstructionModule)module);
 		}
+//		else if (module is ThrusterConstructionModule) {
+//			thrust.thrusters.Add((ThrusterConstructionModule)module);
+//		}
+//		else if (module is ManeuveringConstructionModule) {
+//			thrust.maneuverers.Add((ManeuveringConstructionModule)module);
+//		}
 		else if (module is PowerConstructionModule) {
 			energy.powerPlants.Add((PowerConstructionModule)module);
 		}
@@ -326,5 +335,68 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 		}
 		Unequip(module);
 	}
+	
+	public float GetTotalMass() {
+		var mass = 0f;
+		foreach (var slot in slots.Values) {
+			if (slot.module) {
+				mass += slot.module.stats.mass;
+			}
+		}
+		return mass;
+	}
+	
+	public float GetFuelConsumption() {
+		var res = 0f;
+		foreach (var slot in slots.Values) {
+			if (slot.module is ThrusterConstructionModule) {
+				res += ((ThrusterModuleStats)slot.module.stats).consumption;
+			}
+			else if (slot.module is ManeuveringConstructionModule) {
+				res += ((ManeuveringModuleStats)slot.module.stats).consumption;
+			}
+		}
+		return res;
+	}
+
+	public float GetEnergyConsumption() {
+		var res = 0f;
+		foreach (var slot in slots.Values) {
+			if (slot.module is WeaponConstructionModule) {
+				res += ((WeaponModuleStats)slot.module.stats).energyConsumption;
+			}
+		}
+		return res;
+	}
+
+	public int GetAccelerationScore() {
+		// todo
+		//GetTotalMass();
+		//thrust.GetMaxThrust();
+		return 0;
+	}
+
+	public int GetMassScore() {
+		// todo
+		//GetTotalMass();
+		return 0;
+	}
+	
+	public int GetFuelScore() {
+		// todo
+		//fuel.GetMaxFuel();
+		//GetFuelConsumption();
+		return 0;
+	}
+	
+	public int GetEnergyScore() {
+		// todo
+		//energy.GetMaxEnergy();
+		//energy.GetMaxGeneration();
+		//GetEnergyConsumption();
+		energy.Generate();
+		return 0;
+	}
+
 
 }
