@@ -18,7 +18,7 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		base.Start();
 
 		// create slots
-		int rowCount = 5;
+		int rowCount = 3;
 		int colCount = 20;
 		slots = new List<InventorySlot>();
 		for (int row = 0; row < rowCount; row++) {
@@ -190,6 +190,7 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		if (module.inventorySlot == null) {
 			return;
 		}
+		Debug.Log("removing module from invetory");
 		InventorySlot slot = module.inventorySlot;
 		slot.module = null;
 		module.inventorySlot = null;

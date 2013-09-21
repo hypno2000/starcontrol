@@ -14,13 +14,14 @@ public class InventorySlot : MonoBehaviour {
 		if (module != null) {
 			return;
 		}
-		renderer.enabled = true;
+		Debug.Log("activating slot");
+//		renderer.enabled = true;
 		gameObject.layer = 0;
 		available = true;
 	}
 	
 	public void Deactivate() {
-		renderer.enabled = false;
+//		renderer.enabled = false;
 		gameObject.layer = 2;
 		available = false;
 	}
