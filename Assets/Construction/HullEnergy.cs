@@ -56,7 +56,7 @@ public class HullEnergy {
 			if (!mod.isActive) {
 				continue;
 			}
-			energy += (float)mod.GetStats().power * time;
+			energy += (float)mod.GetStats().power;
 		}
 		return energy;
 	}
@@ -64,7 +64,7 @@ public class HullEnergy {
 	public void Generate(float time) {
 
 		// get generated energy
-		float energy = GetMaxGeneration();
+		float energy = GetMaxGeneration() * time;
 		if (energy == 0f) {
 			return;
 		}
