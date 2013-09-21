@@ -15,6 +15,11 @@ public class ConstructionScene : Scene {
 	private FuelGauge fuelGauge;
 	private EnergyGauge energyGauge;
 
+	private MassGauge massGauge;
+	private PowerGauge powerGauge;
+	private AccelerationGauge accelerationGauge;
+	private FuelConsumptionGauge fuelConsumptionGauge;
+
 	override protected void Awake() {
 		base.Awake();
 		hullManifest = game.hullManifest;
@@ -28,6 +33,11 @@ public class ConstructionScene : Scene {
 		crewGauge = FindObjectOfType(typeof(CrewGauge)) as CrewGauge;
 		fuelGauge = FindObjectOfType(typeof(FuelGauge)) as FuelGauge;
 		energyGauge = FindObjectOfType(typeof(EnergyGauge)) as EnergyGauge;
+		
+		massGauge = FindObjectOfType(typeof(MassGauge)) as MassGauge;
+		powerGauge = FindObjectOfType(typeof(PowerGauge)) as PowerGauge;
+		accelerationGauge = FindObjectOfType(typeof(AccelerationGauge)) as AccelerationGauge;
+		fuelConsumptionGauge = FindObjectOfType(typeof(FuelConsumptionGauge)) as FuelConsumptionGauge;
 	}
 
 	void OnDeserialized() {
@@ -43,6 +53,16 @@ public class ConstructionScene : Scene {
 			fuelGauge.SetMax(hull.fuel.GetMaxFuel());
 			energyGauge.SetCurrent(hull.energy.GetEnergyLeft());
 			energyGauge.SetMax(hull.energy.GetMaxEnergy());
+
+			Debug.Log(hull.GetMassScore());
+			massGauge.SetCurrent(hull.GetMassScore());
+			massGauge.SetMax(100);
+			powerGauge.SetCurrent(hull.GetEnergyScore());
+			powerGauge.SetMax(100);
+			accelerationGauge.SetCurrent(hull.GetAccelerationScore());
+			accelerationGauge.SetMax(100);
+			fuelConsumptionGauge.SetCurrent(hull.GetFuelScore());
+			fuelConsumptionGauge.SetMax(100);
 		}
 	}
 

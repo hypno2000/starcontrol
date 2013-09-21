@@ -38,6 +38,9 @@ public class Gauge : MonoBehaviour {
 	}
 
 	void UpdateLabel() {
+		if (valueLabel == null) {
+			return;
+		}
 		valueLabel.text = "[00ff00]" + ((int)current) + " [ffffff]/[00ff00] " + (int)max;
 	}
 

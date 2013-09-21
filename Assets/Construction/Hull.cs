@@ -88,6 +88,7 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 			extMod.transform.localRotation = extModManifest.rotation;
 			extMod.stats = extModManifest.stats;
 			extMod.hitPointsLeft = extModManifest.hitPointsLeft;
+			extMod.manifest = extModManifest;
 			Equip(extMod, slot);
 			if (extMod is HullConstructionModule) {
 				if (extModManifest.internalModule != null) {
@@ -95,6 +96,7 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 					intMod.stats = extModManifest.internalModule.stats;
 					intMod.hitPointsLeft = extModManifest.internalModule.hitPointsLeft;
 					intMod.SetContents(extModManifest.internalModule.contents);
+					intMod.manifest = extModManifest.internalModule;
 					Equip(intMod, (HullConstructionModule)extMod);
 				}
 			}
@@ -125,6 +127,7 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 				extMod.hullSlot.transform.localPosition,
 				extMod.transform.localRotation
 			);
+			extModManifest.name = extMod.manifest.name;
 			extModManifest.type = (ModuleType) extMod.GetType().GetField("type").GetRawConstantValue();
 			extModManifest.stats = extMod.stats;
 			extModManifest.hitPointsLeft = extMod.hitPointsLeft;
@@ -135,6 +138,7 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 				InternalConstructionModule intMod = ((HullConstructionModule)extMod).internalModule;
 				if (intMod != null) {
 					InternalModuleManifest intModManifest = new InternalModuleManifest(extMod.hullSlot);
+					intModManifest.name = intMod.manifest.name;
 					intModManifest.type = (ModuleType) intMod.GetType().GetField("type").GetRawConstantValue();
 					intModManifest.stats = intMod.stats;
 					intModManifest.hitPointsLeft = intMod.hitPointsLeft;
@@ -229,6 +233,12 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 		if (module is HullConstructionModule) {
 			hullModules.Add(module.transform.position, (HullConstructionModule)module);
 		}
+		else if (module is ThrusterConstructionModule) {
+			thrust.thrusters.Add((ThrusterConstructionModule)module);
+		}
+		else if (module is ManeuveringConstructionModule) {
+			thrust.maneuverers.Add((ManeuveringConstructionModule)module);
+		}
 		module.OnEquip();
 		CalcBounds();
 	}
@@ -254,12 +264,6 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 		if (module is BatteryConstructionModule) {
 			energy.batteries.Add((BatteryConstructionModule)module);
 		}
-//		else if (module is ThrusterConstructionModule) {
-//			thrust.thrusters.Add((ThrusterConstructionModule)module);
-//		}
-//		else if (module is ManeuveringConstructionModule) {
-//			thrust.maneuverers.Add((ManeuveringConstructionModule)module);
-//		}
 		else if (module is PowerConstructionModule) {
 			energy.powerPlants.Add((PowerConstructionModule)module);
 		}
@@ -280,6 +284,12 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 				return;
 			}
 			hullModules.Remove(module.hullSlot.transform.position);
+		}
+		else if (module is ThrusterConstructionModule) {
+			thrust.thrusters.Remove((ThrusterConstructionModule)module);
+		}
+		else if (module is ManeuveringConstructionModule) {
+			thrust.maneuverers.Remove((ManeuveringConstructionModule)module);
 		}
 		HullSlot slot = module.hullSlot;
 		slot.module = null;
@@ -343,6 +353,7 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 				mass += slot.module.stats.mass;
 			}
 		}
+		Debug.Log("Mass: " + mass);
 		return mass;
 	}
 	
@@ -372,54 +383,30 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 	public int GetAccelerationScore() {
 		float maxMass = GetTotalMass();
 		float maxThrust = thrust.GetMaxThrust();
-		return Math.Min(10, (int)(maxThrust / (maxMass * 2.5f)) * 10);
-		//Debug.Log(res);
-		// todo
-		//GetTotalMass();
-		//thrust.GetMaxThrust();
+		return (int)(Mathf.Min(1f, maxThrust / (maxMass * 2.5f)) * 100f);
 	}
 
 	public int GetMassScore() {
-
 		float maxMass = GetTotalMass();
-		float vahe = (maxMass * 0.04f);
-		int res;
-		if(vahe >= 1){
-			res = 10;   
-		}
-		else {
-			res = (int)vahe * 10;
-		}
-		//Debug.Log(res);
-
-		// todo
-		//GetTotalMass();
-		return res;
+		Debug.Log("Mass score" + ((int)Mathf.Min(1f, maxMass * 0.04f * 100f)));
+		return (int)(Mathf.Min(1f, maxMass * 0.04f) * 100f);
 	}
 
 	public int GetFuelScore() {
-		// todo
 		float maxFuel = fuel.GetMaxFuel();
 		float maxConsumption = GetFuelConsumption();
-
-		return Math.Min(10, (int)(1 / (maxConsumption * 1.1 / maxFuel)) * 10);
-
-		//fuel.GetMaxFuel();
-		//GetFuelConsumption();
+		return (int)(Mathf.Min(1f, 1f / (maxConsumption * 1.1f / maxFuel)) * 100f);
 	}
 
 	public int GetEnergyScore() {
 		float maxEnergy = energy.GetMaxEnergy();
 		float maxGeneration = energy.GetMaxGeneration();
 		float maxConsumption = GetEnergyConsumption();
-		return Math.Min(10, (int)((((maxEnergy / 1.5) * maxGeneration) / maxConsumption) * 2.5 / 100));
-
-		//Debug.Log(res);
-		// todo
-		//energy.GetMaxEnergy();
-		//energy.GetMaxGeneration();
-		//GetEnergyConsumption();
-		//energy.Generate();
+		Debug.Log("maxEnergy: " + maxEnergy);
+		Debug.Log("maxGeneration: " + maxGeneration);
+		Debug.Log("maxConsumption: " + maxConsumption);
+		Debug.Log("result: " + ((((maxEnergy / 1.5f) * maxGeneration) / maxConsumption) * 2.5f));
+		return (int)(Mathf.Min(100f, (((maxEnergy / 1.5f) * maxGeneration) / maxConsumption) * 2.5f));
 	}
 
 

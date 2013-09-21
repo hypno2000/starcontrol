@@ -2,11 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CombatCamera : MonoBehaviour
-{
+public class CombatCamera : MonoBehaviour {
 
 	private Ship[] _ships;
-	public float MinDistance;
+	public float dist = 1.4f;
 
 	void Start()
 	{
@@ -24,7 +23,9 @@ public class CombatCamera : MonoBehaviour
 		);
 
 		// zoom in/out based on ships distance
-		var distance = Vector3.Distance(_ships[0].transform.position, _ships[1].transform.position) / 1.2f;
+		var distance = Vector3.Distance(_ships[0].transform.position, _ships[1].transform.position) / (dist*1.2f);
+
+		if(distance<10f) distance =10f;
 		camera.orthographicSize = Mathf.Max((_ships[0].maxLength + _ships[1].maxLength) / 2f, distance);
 
 	}

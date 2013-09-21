@@ -15,11 +15,10 @@ public class HullThrust {
 	public float GetMaxThrust() {
 		float thrust = 0f;
 		foreach (var mod in thrusters) {
-			if (!mod.isActive) {
-				continue;
-			}
+			Debug.Log("here");
 			thrust += mod.GetStats().thrust;
 		}
+		Debug.Log("Thrust: " + thrust);
 		return thrust;
 	}
 
