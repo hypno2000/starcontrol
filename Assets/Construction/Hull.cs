@@ -370,32 +370,56 @@ public class Hull : SceneAware<ConstructionScene>, LeaveAware {
 	}
 
 	public int GetAccelerationScore() {
+		float maxMass = GetTotalMass();
+		float maxThrust = thrust.GetMaxThrust();
+		return Math.Min(10, (int)(maxThrust / (maxMass * 2.5f)) * 10);
+		//Debug.Log(res);
 		// todo
 		//GetTotalMass();
 		//thrust.GetMaxThrust();
-		return 0;
 	}
 
 	public int GetMassScore() {
+
+		float maxMass = GetTotalMass();
+		float vahe = (maxMass * 0.04f);
+		int res;
+		if(vahe >= 1){
+			res = 10;   
+		}
+		else {
+			res = (int)vahe * 10;
+		}
+		//Debug.Log(res);
+
 		// todo
 		//GetTotalMass();
-		return 0;
+		return res;
 	}
-	
+
 	public int GetFuelScore() {
 		// todo
+		float maxFuel = fuel.GetMaxFuel();
+		float maxConsumption = GetFuelConsumption();
+
+		return Math.Min(10, (int)(1 / (maxConsumption * 1.1 / maxFuel)) * 10);
+
 		//fuel.GetMaxFuel();
 		//GetFuelConsumption();
-		return 0;
 	}
-	
+
 	public int GetEnergyScore() {
+		float maxEnergy = energy.GetMaxEnergy();
+		float maxGeneration = energy.GetMaxGeneration();
+		float maxConsumption = GetEnergyConsumption();
+		return Math.Min(10, (int)((((maxEnergy / 1.5) * maxGeneration) / maxConsumption) * 2.5 / 100));
+
+		//Debug.Log(res);
 		// todo
 		//energy.GetMaxEnergy();
 		//energy.GetMaxGeneration();
 		//GetEnergyConsumption();
 		//energy.Generate();
-		return 0;
 	}
 
 

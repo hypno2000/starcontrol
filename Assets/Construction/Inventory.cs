@@ -18,8 +18,8 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 		base.Start();
 
 		// create slots
-		int rowCount = 3;
-		int colCount = 20;
+		int rowCount = 2;
+		int colCount = 8;
 		slots = new List<InventorySlot>();
 		for (int row = 0; row < rowCount; row++) {
 			for (int col = 0; col < colCount; col++) {
@@ -56,42 +56,42 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 			HullConstructionModule modulePrefab = game.GetConstructionModulePrefab(ModuleType.Hull) as HullConstructionModule;
 			HullConstructionModule module = Instantiate(modulePrefab) as HullConstructionModule;
 			module.manifest = new ModuleManifest("Basic hull");
-			AddModules(module, 3);
+			AddModules(module, 20);
 
 			ThrusterConstructionModule thrusterModulePrefab = game.GetConstructionModulePrefab(ModuleType.Thruster) as ThrusterConstructionModule;
 			var thrusterModule = Instantiate(thrusterModulePrefab) as ThrusterConstructionModule;
 			thrusterModule.manifest = new ModuleManifest("Basic thruster");
-			AddModules (thrusterModule, 3);
+			AddModules (thrusterModule, 15);
 
 			ManeuveringConstructionModule maneuveringModulePrefab = game.GetConstructionModulePrefab(ModuleType.Maneuvering) as ManeuveringConstructionModule;
 			var maneuveringModule = Instantiate(maneuveringModulePrefab) as ManeuveringConstructionModule;
 			maneuveringModule.manifest = new ModuleManifest("Basic turner");
-			AddModules(maneuveringModule, 3);
+			AddModules(maneuveringModule, 15);
 
 			WeaponConstructionModule weaponModulePrefab = game.GetConstructionModulePrefab(ModuleType.Weapon) as WeaponConstructionModule;
 			var weaponModule = Instantiate(weaponModulePrefab) as WeaponConstructionModule;
 			weaponModule.manifest = new ModuleManifest("Missile weapon");
-			AddModules (weaponModule, 3);
+			AddModules (weaponModule, 15);
 
 			BatteryConstructionModule batteryModulePrefab = game.GetConstructionModulePrefab(ModuleType.Battery) as BatteryConstructionModule;
 			var batteryModule = Instantiate(batteryModulePrefab) as BatteryConstructionModule;
 			batteryModule.manifest = new ModuleManifest("Battery");
-			AddModules (batteryModule, 3);
+			AddModules (batteryModule, 15);
 
 			CrewConstructionModule crewModulePrefab = game.GetConstructionModulePrefab(ModuleType.Crew) as CrewConstructionModule;
 			var crewModule = Instantiate(crewModulePrefab) as CrewConstructionModule;
 			crewModule.manifest = new ModuleManifest("Crew");
-			AddModules (crewModule, 3);
+			AddModules (crewModule, 15);
 
 			FuelConstructionModule fuelModulePrefab = game.GetConstructionModulePrefab(ModuleType.Fuel) as FuelConstructionModule;
 			FuelConstructionModule fuelModule = Instantiate(fuelModulePrefab) as FuelConstructionModule;
 			fuelModule.manifest = new ModuleManifest("Fuel");
-			AddModules (fuelModule, 3);
+			AddModules (fuelModule, 15);
 
 			PowerConstructionModule powerModulePrefab = game.GetConstructionModulePrefab(ModuleType.Power) as PowerConstructionModule;
 			PowerConstructionModule powerModule = Instantiate(powerModulePrefab) as PowerConstructionModule;
 			powerModule.manifest = new ModuleManifest("Power");
-			AddModules (powerModule, 3);
+			AddModules (powerModule, 15);
 		}
 
 		// create inventory based on manifest
@@ -206,7 +206,6 @@ public class Inventory : SceneAware<ConstructionScene>, LeaveAware {
 			slot.module = null;
 			module.inventorySlot = null;
 			modules.Remove(module);
-			Debug.Log(slot.number + " " + module.manifest.name);
 			slot.Activate();
 		}
 		if(slot.number > 0)

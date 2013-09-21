@@ -10,7 +10,10 @@ public class Gauge : MonoBehaviour {
 
 	void Start() {
 		progressBar = GetComponentInChildren<UISlider>() as UISlider;
-		valueLabel = GetComponentsInChildren<UILabel>()[1] as UILabel;
+		var labels = GetComponentsInChildren<UILabel>();
+		if (labels.Length > 1) {
+			valueLabel = GetComponentsInChildren<UILabel>()[1] as UILabel;
+		}
 	}
 
 	public void SetCurrent(float val) {
